@@ -1,9 +1,13 @@
 #include "opencv2/opencv.hpp"
 #include <iostream>
+#include <sys/time.h>
 using namespace cv;
 using namespace std;
 int main()
 {
+    struct timeval start, end1;
+    double time1;
+
     string src = "nvarguscamerasrc sensor-id=0 ! \
 	video/x-raw(memory:NVMM), width=(int)640, height=(int)360, \
     format=(string)NV12, framerate=(fraction)30/1 ! \
@@ -40,6 +44,8 @@ int main()
 
     Mat frame, gray, thres;
     while (true) {
+        gettimeofday(&start,NULL);
+
       	source >> frame;
         	if (frame.empty()){ cerr << "frame empty!" << endl; break; }
 
@@ -50,6 +56,10 @@ int main()
 	    writer2 << gray;
         writer3 << thres;
 	    waitKey(30);
+
+        gettimeofday(&end1,NULL);
+        time1=end1.tv_sec-start.tv_sec +(end1.tv_usec-start.tv_usec)/1000000.0;
+        cout << "time:" << time1 << endl;
     }
     return 0;
 }
