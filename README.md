@@ -6,6 +6,8 @@ dst2, writer2 그레이
 
 dst3, writer3 이진화
 
-##실행결과
+## 실행결과
+
+---
 
 ![jetson_camera](https://github.com/user-attachments/assets/a80f03ef-7e31-462c-9f86-f6898758a9a6)
